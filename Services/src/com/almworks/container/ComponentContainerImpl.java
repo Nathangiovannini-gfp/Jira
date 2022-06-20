@@ -75,7 +75,7 @@ class ComponentContainerImpl implements MutableComponentContainer, ComponentCont
   }
 
   public <I, C extends I> void reregisterActor(Role<I> role, C actor) {
-    doRegister(role, actor, true);
+    doRegister(role, actor, false);
   }
 
   public <I> void registerActorClass(Role<I> role, Class<? extends I> actorClass) {
@@ -101,7 +101,7 @@ class ComponentContainerImpl implements MutableComponentContainer, ComponentCont
   static void startWithDebugging(MutablePicoContainer pico) {
     try {
       Method startMethod = Startable.class.getMethod("start");
-      new LifecycleVisitor(startMethod, Startable.class, true) {
+      new LifecycleVisitor(startMethod, Startable.class, false) {
         public void visitComponentAdapter(ComponentAdapter componentAdapter) {
           ComponentAdapter c = componentAdapter;
           if (!(c instanceof DecoratingComponentAdapter)) {
